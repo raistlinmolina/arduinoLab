@@ -47,24 +47,50 @@ byte knownKeys[NR_KNOWN_KEYS][MFRC522::MF_KEY_SIZE] =  {
     {0x1a, 0x98, 0x2c, 0x7e, 0x45, 0x9a}, // 1A 98 2C 7E 45 9A
     {0xd3, 0xf7, 0xd3, 0xf7, 0xd3, 0xf7}, // D3 F7 D3 F7 D3 F7
     {0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff}, // AA BB CC DD EE FF
-    {0x00, 0x00, 0x00, 0x00, 0x00, 0x01}, // 00 00 00 00 00 01
-    {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}  // 00 00 00 00 00 00
+    {0x00, 0x00, 0x00, 0x00, 0x00, 0xff}, // 00 00 00 00 00 01
+    {0x00, 0x00, 0x00, 0x00, 0xfe, 0xff}  // 00 00 00 00 00 00
 };
 
 unsigned long long byteArray2ULong(byte* d){
+  return byteArray2ULong(d, MFRC522::MF_KEY_SIZE);
+}
+
+unsigned long long byteArray2ULong(byte* d, int keySize){
   unsigned long long adc_value = 0;
-  adc_value  =  (unsigned long long)d[0] << 40;
-  Serial.print(((unsigned long) adc_value/100000));
-  Serial.print(" ");
-  adc_value += (unsigned long long)d[1] << 32;
-  Serial.print(((unsigned long) adc_value%100000));
-  Serial.print(" ");
-  adc_value += (unsigned long long)d[2] << 24;
-  adc_value += (unsigned long long)d[3] << 16;
-  adc_value += (unsigned long long)d[4] << 8;
-  adc_value += (unsigned long long)d[5];
+  int multiplier = 8 * (keySize);
+  int index = 0;
+  while (multiplier > 0){
+    multiplier -= 8;
+    adc_value  +=  (unsigned long long)d[index] << multiplier;
+    index++;
+  }
   return adc_value;
 }
+
+void addToKey(byte* d, byte toAdd){
+  addToKey(d, toAdd, MFRC522::MF_KEY_SIZE);
+}
+
+
+ 
+void addToKey(byte* d, byte toAdd, int keySize){
+  
+  bool add = true;
+  int index = keySize-1;
+  byte temp = 0;
+  byte carry = toAdd;
+  while (add && index>=0){
+    temp = d[index];
+    d[index] += carry;
+    if ( temp > d[index]){
+      carry = 0x01;
+    }else{
+      add = false;
+    }
+    index--;
+  }
+}
+
 
 char choice;
 /*
@@ -162,34 +188,6 @@ boolean try_key(MFRC522::MIFARE_Key *key)
     start();
 }
 
-/*
- * Main loop.
- */
-void loop() {
-  start();
-  delay(100000);
-}
-
-void start(){
-//  choice = Serial.read();
-//  
-//  if(choice == '1')
-//  {
-//    Serial.println("Read the card");
-//    readCard();
-//  }
-  for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
-    unsigned long long valueKey = byteArray2ULong(knownKeys[k]);
-    unsigned long highPart= valueKey / 100000;
-    //TODO: fill lowPart with 0s to the left cause if not you lose one decimal position when printing.
-    unsigned long lowPart = valueKey % 100000;
-    Serial.print(highPart);
-    Serial.print(" ");
-    Serial.println(lowPart);
-  }
-}
-
-
 void readCard(){ //Read card
   Serial.println("Insert card...");
   // Look for new cards
@@ -223,3 +221,45 @@ void readCard(){ //Read card
         }
     }
 }
+
+void printLongLong(unsigned long long toPrint){
+    unsigned long highPart= toPrint / 100000;
+    //TODO: fill lowPart with 0s to the left cause if not you lose one decimal position when printing.
+    unsigned long lowPart = toPrint % 100000;
+    Serial.print(highPart);
+    //Serial.print(" ");
+    if (lowPart <10000) Serial.print("0");
+    Serial.println(lowPart);
+}
+
+
+void start(){
+//  choice = Serial.read();
+//  
+//  if(choice == '1')
+//  {
+//    Serial.println("Read the card");
+//    readCard();
+//  }
+  for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
+    unsigned long long valueKey = byteArray2ULong(knownKeys[k]);
+    printLongLong(valueKey);
+    addToKey(knownKeys[k],0x01);
+    valueKey = byteArray2ULong(knownKeys[k]);
+    printLongLong(valueKey);
+    Serial.println("");
+  }
+}
+/*
+ * Main loop.
+ */
+void loop() {
+  start();
+  delay(100000);
+}
+
+
+
+
+
+
