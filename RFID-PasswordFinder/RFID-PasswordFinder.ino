@@ -7,16 +7,17 @@
  * block 0 of a MIFARE RFID card using a RFID-RC522 reader.
  * 
  * Typical pin layout used:
+ * -----------------------------------------------------------------------------------------------------
+ *             MFRC522      Arduino       Arduino   Wemos      Arduino    Arduino          Arduino
+ *             Reader/PCD   Uno/101       Mega      D1 R2      Nano v3    Leonardo/Micro   Pro Micro
+ * Signal      Pin          Pin           Pin       Pin        Pin        Pin              Pin
  * -----------------------------------------------------------------------------------------
- *             MFRC522      Arduino       Arduino   Arduino    Arduino          Arduino
- *             Reader/PCD   Uno/101       Mega      Nano v3    Leonardo/Micro   Pro Micro
- * Signal      Pin          Pin           Pin       Pin        Pin              Pin
- * -----------------------------------------------------------------------------------------
- * RST/Reset   RST          9             5         D9         RESET/ICSP-5     RST
- * SPI SS      SDA(SS)      10            53        D10        10               10
- * SPI MOSI    MOSI         11 / ICSP-4   51        D11        ICSP-4           16
- * SPI MISO    MISO         12 / ICSP-1   50        D12        ICSP-1           14
- * SPI SCK     SCK          13 / ICSP-3   52        D13        ICSP-3           15
+ * RST/Reset   RST          9             5         D4         D9         RESET/ICSP-5     RST
+ * SPI SS      SDA(SS)      10            53        D8         D10        10               10
+ * SPI MOSI    MOSI         11 / ICSP-4   51        D7         D11        ICSP-4           16
+ * SPI MISO    MISO         12 / ICSP-1   50        D6         D12        ICSP-1           14
+ * SPI SCK     SCK          13 / ICSP-3   52        D5         D13        ICSP-3           15
+ * 
  *
  */
 
@@ -48,7 +49,7 @@ byte knownKeys[NR_KNOWN_KEYS][MFRC522::MF_KEY_SIZE] =  {
     {0xd3, 0xf7, 0xd3, 0xf7, 0xd3, 0xf7}, // D3 F7 D3 F7 D3 F7
     {0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff}, // AA BB CC DD EE FF
     {0x00, 0x00, 0x00, 0x00, 0x00, 0xff}, // 00 00 00 00 00 01
-    {0x00, 0x00, 0x00, 0x00, 0xfe, 0xff}  // 00 00 00 00 00 00
+    {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}  // 00 00 00 00 00 00
 };
 
 unsigned long long byteArray2ULong(byte* d){
@@ -142,6 +143,8 @@ boolean try_key(MFRC522::MIFARE_Key *key)
     for(byte block = 0; block < 64; block++){
       
     // Serial.println(F("Authenticating using key A..."));
+    dump_byte_array((*key).keyByte, MFRC522::MF_KEY_SIZE);
+    Serial.println();
     status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, key, &(mfrc522.uid));
     if (status != MFRC522::STATUS_OK) {
         Serial.print(F("PCD_Authenticate() failed: "));
@@ -208,17 +211,21 @@ void readCard(){ //Read card
     
     // Try the known default keys
     MFRC522::MIFARE_Key key;
-    for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
+    bool exito = false;
+    while (!exito){
+    //for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
         // Copy the known key into the MIFARE_Key structure
         for (byte i = 0; i < MFRC522::MF_KEY_SIZE; i++) {
-            key.keyByte[i] = knownKeys[k][i];
+            key.keyByte[i] = knownKeys[8][i];
         }
         // Try the key
         if (try_key(&key)) {
             // Found and reported on the key and block,
             // no need to try other keys for this PICC
-            break;
+            exito = true;
+            //break;
         }
+        addToKey(knownKeys[8],0x01);
     }
 }
 
@@ -234,28 +241,29 @@ void printLongLong(unsigned long long toPrint){
 
 
 void start(){
-//  choice = Serial.read();
-//  
-//  if(choice == '1')
-//  {
-//    Serial.println("Read the card");
-//    readCard();
-//  }
-  for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
-    unsigned long long valueKey = byteArray2ULong(knownKeys[k]);
-    printLongLong(valueKey);
-    addToKey(knownKeys[k],0x01);
-    valueKey = byteArray2ULong(knownKeys[k]);
-    printLongLong(valueKey);
-    Serial.println("");
+  choice = Serial.read();
+  
+  if(choice == '1')
+  {
+    Serial.println("Read the card");
+    readCard();
   }
+//  byte[] keyToTest = byteArray2ULong(knownKeys[8]);
+//  for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
+//    unsigned long long valueKey = byteArray2ULong(knownKeys[k]);
+//    printLongLong(valueKey);
+//    
+//    addToKey(knownKeys[k],0x01);
+//    valueKey = byteArray2ULong(knownKeys[k]);
+//    printLongLong(valueKey);
+//    Serial.println("");
+//  }
 }
 /*
  * Main loop.
  */
 void loop() {
   start();
-  delay(100000);
 }
 
 
