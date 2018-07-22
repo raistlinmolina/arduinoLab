@@ -97,7 +97,7 @@ MPU6050 mpu;
 // from the FIFO. Note this also requires gravity vector calculations.
 // Also note that yaw/pitch/roll angles suffer from gimbal lock (for
 // more info, see: http://en.wikipedia.org/wiki/Gimbal_lock)
-#define OUTPUT_READABLE_YAWPITCHROLL
+//#define OUTPUT_READABLE_YAWPITCHROLL
 
 // uncomment "OUTPUT_READABLE_REALACCEL" if you want to see acceleration
 // components with gravity removed. This acceleration reference frame is
@@ -154,6 +154,52 @@ void dmpDataReady() {
     mpuInterrupt = true;
 }
 
+// ================================================================
+// ===               MPU INITIALIZATION  ROUTINE                ===
+// ================================================================
+//void initMPU(){
+//    // initialize device
+//    Serial.println(F("Initializing I2C devices..."));
+//    mpu.initialize();
+//
+//    // verify connection
+//    Serial.println(F("Testing device connections..."));
+//    Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+//
+//    // wait for ready
+//    Serial.println(F("\nSend any character to begin DMP programming and demo: "));
+//    while (Serial.available() && Serial.read()); // empty buffer
+//    while (!Serial.available());                 // wait for data
+//    while (Serial.available() && Serial.read()); // empty buffer again
+//
+//    // load and configure the DMP
+//    Serial.println(F("Initializing DMP..."));
+//    devStatus = mpu.dmpInitialize();
+//}
+
+void initMPU(){
+    // initialize device
+    //Serial.println(F("Initializing I2C devices..."));
+	mpu.reset();
+	delay(5000);
+    mpu.initialize();
+
+    // verify connection
+    //Serial.println(F("Testing device connections..."));
+    //Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+
+    // wait for ready
+    //Serial.println(F("\nSend any character to begin DMP programming and demo: "));
+    //while (Serial.available() && Serial.read()); // empty buffer
+    //while (!Serial.available());                 // wait for data
+    //while (Serial.available() && Serial.read()); // empty buffer again
+    mpu.reset();
+    delay(5000);
+    // load and configure the DMP
+    //Serial.println(F("Initializing DMP..."));
+    devStatus = mpu.dmpInitialize();
+}
+
 
 
 // ================================================================
@@ -180,24 +226,8 @@ void setup() {
     // the baud timing being too misaligned with processor ticks. You must use
     // 38400 or slower in these cases, or use some kind of external separate
     // crystal solution for the UART timer.
+    initMPU();
 
-    // initialize device
-    Serial.println(F("Initializing I2C devices..."));
-    mpu.initialize();
-
-    // verify connection
-    Serial.println(F("Testing device connections..."));
-    Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
-
-    // wait for ready
-    Serial.println(F("\nSend any character to begin DMP programming and demo: "));
-    while (Serial.available() && Serial.read()); // empty buffer
-    while (!Serial.available());                 // wait for data
-    while (Serial.available() && Serial.read()); // empty buffer again
-
-    // load and configure the DMP
-    Serial.println(F("Initializing DMP..."));
-    devStatus = mpu.dmpInitialize();
 
     // supply your own gyro offsets here, scaled for min sensitivity
     mpu.setXGyroOffset(220);
@@ -208,16 +238,16 @@ void setup() {
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
         // turn on the DMP, now that it's ready
-        Serial.println(F("Enabling DMP..."));
+        //Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
         // enable Arduino interrupt detection
-        Serial.println(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
+        //Serial.println(F("Enabling interrupt detection (Arduino external interrupt D7)..."));
         attachInterrupt(D7, dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
-        Serial.println(F("DMP ready! Waiting for first interrupt..."));
+        //Serial.println(F("DMP ready! Waiting for first interrupt..."));
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -352,14 +382,14 @@ void loop() {
             mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             if ( (abs(aaWorld.x - aaWorldOld.x)>200) || (abs(aaWorld.y - aaWorldOld.y)>200) || (abs(aaWorld.z - aaWorldOld.z)>200)){
 
-            Serial.print("aworld\t");
+            //Serial.print("aworld\t");
             Serial.print(aaWorld.x);
             Serial.print("\t");
             Serial.print(aaWorld.y);
             Serial.print("\t");
             Serial.println(aaWorld.z);
-            Serial.print("\t");
-            Serial.println(aaWorld.x + aaWorld.y);
+            //Serial.print("\t");
+            //Serial.println(aaWorld.x + aaWorld.y);
             aaWorldOld.x = aaWorld.x;
             aaWorldOld.y = aaWorld.y;
             aaWorldOld.z = aaWorld.z;
