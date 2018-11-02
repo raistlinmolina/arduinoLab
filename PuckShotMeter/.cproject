@@ -50,6 +50,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -72,6 +74,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -94,6 +98,8 @@
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -115,7 +121,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/**/._*|libraries/?*/utility/*/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+                        <entry excluding="libraries/RemoteXY/modules|libraries/RemoteXY/classes|libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/**/._*|libraries/?*/utility/*/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
@@ -145,6 +151,16 @@
     	
     <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
     	
-    <storageModule moduleId="refreshScope"/>
+    <storageModule moduleId="refreshScope" versionNumber="2">
+        		
+        <configuration configurationName="Release">
+            			
+            <resource resourceType="PROJECT" workspacePath="/PuckShotMeter"/>
+            		
+        </configuration>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
     
 </cproject>
