@@ -8,7 +8,7 @@ int changeTime = 10;
 int timeUsed = 0;
 int blinkTime = 1;
 const bool useDeMux = false;
-int lastLitTarget = 0;
+int lastLitTarget = -1;
 bool stillLit = false;
 int multiplier = 1000; //To convert to milliseconds
 int interval = 1000; // Interval
@@ -34,18 +34,10 @@ target targets[totalTargets];
 
 int targetsPins[totalTargets] = {3,4,5,6,7};
 
-
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  randomSeed(analogRead(0));
-  initTargets();
-}
-
 void initTargets(){
   for (int i=0; i<totalTargets; i++){
-    targets[i].blinkTime = blinkTime;
-    targets[i].timeLimit = litTime;
+    targets[i].blinkTime = blinkTime*multiplier;
+    targets[i].timeLimit = litTime*multiplier;
     targets[i].hit = false;
     targets[i].timeLeft = 0;
     targets[i].lit = off;
@@ -56,12 +48,12 @@ void initTargets(){
 
 void showStatus(){
   Serial.println("#### TARGET STATUS ###");
-  
-  for (int i=0; i<totalTargets; i++){
-      Serial.print(itoa(i, NULL, 10));
+  char buf[12];
+  for (int i = 0; i<totalTargets; i++){
+      Serial.print(itoa(i, buf, 10));
   }
-  
-  for (int i=0; i<totalTargets; i++){
+  Serial.println("");
+  for (int i = 0; i<totalTargets; i++){
     if (targets[i].hit){
       Serial.print("H");
     }else if (targets[i].lit == lit){
@@ -74,10 +66,29 @@ void showStatus(){
       Serial.print("?");
     }
   }
+  Serial.println("");
+  Serial.println("");
 }
 
 void updateTargets(){
-  
+  stillLit = false;
+  int litTarget = 0;
+  for (int i = 0; i<totalTargets; i++){
+    if (targets[i].timeLeft > 0){
+      stillLit = true;
+      lastLitTarget = i;
+      litTarget = i;
+      Serial.print("Target ");
+      char buf[12];
+      Serial.print(itoa(i,buf,10));
+      Serial.print(" updated");
+      Serial.println("");
+      targets[i].timeLeft = targets[i].timeLeft - interval;
+    }
+  }
+  Serial.println("");
+  Serial.println("");
+  return litTarget;
 }
 
 void updateTargetsStatus(){
@@ -85,9 +96,16 @@ void updateTargetsStatus(){
 }
 
 void setTarget(int i){
+    lastLitTarget=i;
     targets[i].hit = false;
-    targets[i].timeLeft = changeTime * multiplier;
+    targets[i].timeLeft = litTime * multiplier;
     targets[i].lit = blinking;
+}
+
+void unsetTarget(int i){
+    targets[i].hit = false;
+    targets[i].timeLeft = 0;
+    targets[i].lit = off;
 }
 
 void hitTarget(int i){
@@ -100,14 +118,15 @@ void hitTarget(int i){
 int selectTarget(){
   stillLit = false;
   int newTarget = lastLitTarget;
-  for (int i = 0; i++; i<totalTargets){
+  for (int i = 0; i<totalTargets; i++){
     if (targets[i].timeLeft > 0){
       stillLit = true;
       lastLitTarget = i;
       Serial.print("Target ");
-      Serial.print(itoa(i,NULL,10);
+      char buf[12];
+      Serial.print(itoa(i,buf,10));
       Serial.print(" has still ");
-      Serial.print(itoa(targets[i].timeLeft);
+      Serial.print(itoa(targets[i].timeLeft,buf,10));
       Serial.println(" milliseconds left");
     }
   }
@@ -115,21 +134,30 @@ int selectTarget(){
     //All targets are either hit or off
     do{
         newTarget = random(totalTargets);
-     }while(((newTarget != lastTarget) || (targetsLeft == 1))  && (!target[newTarget].hit))
+     }while((newTarget == lastLitTarget)  || (targets[newTarget].hit));
      //We check that the new target is different from the current one (unles it is the last one) and that it is not an already hit target. 
     Serial.print("New target selected: ");
-    Serial.println(itoa(newTarget,NULL,10));
+    char buf[12];
+    Serial.println(itoa(newTarget,buf,10));
+    unsetTarget(lastLitTarget);
     setTarget(newTarget);
-    updateTargets();
-    showStatus();
+    
   }
   return newTarget;
 }
 
-
-
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  randomSeed(analogRead(0));
+  initTargets();
+  setTarget(random(totalTargets));
+}
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  int newTarget = selectTarget();
+  showStatus();
+  delay(interval);
+  updateTargets();
 }
