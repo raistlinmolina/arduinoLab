@@ -199,13 +199,13 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/A.ESP8266.NETWO
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.ESP8266.NETWORK.UPLOAD.TOOL/value=esp8266OTA
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/value=3600
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/value=0
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/value=1532286767
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/value=1547923224
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/value=1532279567
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/value=1547919624
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/value=3600
@@ -460,7 +460,7 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.RESETM
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.RESETMETHOD/value=nodemcu
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.SPEED/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.SPEED/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.SPEED/value=19200
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.SPEED/value=57600
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.TOOL/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.TOOL/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.UPLOAD.TOOL/value=esptool
@@ -487,10 +487,10 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.BOARD_NA
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.BOARD_NAME/value=WeMos D1 R2 & mini
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/value=/dev/ttyUSB2
+environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/value=/dev/ttyUSB0
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/value=${eclipse_home}/////
+environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/value=${eclipse_home}///////////////////////////////////////////////////////
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/value=
@@ -514,7 +514,7 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.LI
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.LINK/value=
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.MENU/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.MENU/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.MENU/value=CpuFrequency\=80\nDebug\=Disabled\nDebugLevel\=None____\nFlashErase\=sdk\nFlashSize\=4M1M\nLwIPVariant\=v2mss536\nUploadSpeed\=115200.upload.speed
+environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.MENU/value=CpuFrequency\=80\nDebug\=Disabled\nDebugLevel\=None____\nFlashErase\=sdk\nFlashSize\=4M1M\nLwIPVariant\=v2mss536\nUploadSpeed\=57600
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.OBJCOPY/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.OBJCOPY/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.OBJCOPY/value=${A.RECIPE.OBJCOPY.HEX.PATTERN}

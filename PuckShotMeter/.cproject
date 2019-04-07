@@ -1,73 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
-	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="io.sloeber.core.toolChain.release.2013844203">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="io.sloeber.core.toolChain.release.2013844203" moduleId="org.eclipse.cdt.core.settings" name="Release">
-				<externalSettings/>
-				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-				</extensions>
-			</storageModule>
-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildProperties="" description="" id="io.sloeber.core.toolChain.release.2013844203" name="Release" parent="org.eclipse.cdt.build.core.emptycfg">
-					<folderInfo id="io.sloeber.core.toolChain.release.2013844203.357042017" name="/" resourcePath="">
-						<toolChain id="io.sloeber.core.toolChain.release.506211167" name="Arduino Toolchain (Sloeber edition)" superClass="io.sloeber.core.toolChain.release">
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="io.sloeber.targetplatform.1899363694" name="Arduino Target" osList="all" superClass="io.sloeber.targetplatform"/>
-							<builder buildPath="${workspace_loc:/PuckShotMeter}/Release" id="io.sloeber.sketch.builder.1199295438" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
-							<tool id="io.sloeber.tool.sketch.compiler.cpp.387329017" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
-								<option id="io.sloeber.compiler.cpp.sketch.option.incpath.1037524154" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
-								</option>
-								<inputType id="io.sloeber.compiler.cpp.sketch.input.230408172" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
-							</tool>
-							<tool id="io.sloeber.tool.compiler.c.926492472" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
-								<option id="io.sloeber.compiler.c.sketch.option.incpath.1767202723" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
-								</option>
-								<inputType id="io.sloeber.compiler.c.sketch.input.1879399874" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
-							</tool>
-							<tool id="io.sloeber.tool.sketch.compiler.s.703070965" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
-								<option id="io.sloeber.compiler.asm.sketch.option.incpath.899284890" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
-								</option>
-								<inputType id="io.sloeber.compiler.S.sketch.input.900919520" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
-							</tool>
-							<tool id="io.sloeber.tool.ar.166186128" name="Arduino archiver" superClass="io.sloeber.tool.ar"/>
-							<tool id="io.sloeber.tool.combine.1737998971" name="Arduino combiner" superClass="io.sloeber.tool.combine"/>
-							<tool id="io.sloeber.tool.objcopy.eep.1549913237" name="Arduino tool Create eeprom" superClass="io.sloeber.tool.objcopy.eep"/>
-							<tool id="io.sloeber.tool.size.1758588744" name="Arduino tool Print Size" superClass="io.sloeber.tool.size"/>
-						</toolChain>
-					</folderInfo>
-					<sourceEntries>
-						<entry excluding="libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/**/._*|libraries/?*/utility/*/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
-					</sourceEntries>
-				</configuration>
-			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-		</cconfiguration>
-	</storageModule>
-	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="PuckShotMeter.null.564768994" name="PuckShotMeter"/>
-	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="refreshScope"/>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        		
+        <cconfiguration id="io.sloeber.core.toolChain.release.2013844203">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="io.sloeber.core.toolChain.release.2013844203" moduleId="org.eclipse.cdt.core.settings" name="Release">
+                				
+                <externalSettings/>
+                				
+                <extensions>
+                    					
+                    <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    				
+                </extensions>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                				
+                <configuration artifactName="${ProjName}" buildProperties="" description="" id="io.sloeber.core.toolChain.release.2013844203" name="Release" parent="org.eclipse.cdt.build.core.emptycfg">
+                    					
+                    <folderInfo id="io.sloeber.core.toolChain.release.2013844203.357042017" name="/" resourcePath="">
+                        						
+                        <toolChain id="io.sloeber.core.toolChain.release.506211167" name="Arduino Toolchain (Sloeber edition)" superClass="io.sloeber.core.toolChain.release">
+                            							
+                            <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="io.sloeber.targetplatform.1899363694" name="Arduino Target" osList="all" superClass="io.sloeber.targetplatform"/>
+                            							
+                            <builder buildPath="${workspace_loc:/PuckShotMeter}/Release" id="io.sloeber.sketch.builder.1199295438" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
+                            							
+                            <tool id="io.sloeber.tool.sketch.compiler.cpp.387329017" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
+                                								
+                                <option id="io.sloeber.compiler.cpp.sketch.option.incpath.1037524154" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
+                                    								
+                                </option>
+                                								
+                                <inputType id="io.sloeber.compiler.cpp.sketch.input.230408172" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="io.sloeber.tool.compiler.c.926492472" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
+                                								
+                                <option id="io.sloeber.compiler.c.sketch.option.incpath.1767202723" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
+                                    								
+                                </option>
+                                								
+                                <inputType id="io.sloeber.compiler.c.sketch.input.1879399874" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="io.sloeber.tool.sketch.compiler.s.703070965" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
+                                								
+                                <option id="io.sloeber.compiler.asm.sketch.option.incpath.899284890" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/core}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/core/variant}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/I2Cdev}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/MPU6050}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/Wire}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/ESP8266WiFi/src}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/PuckShotMeter/libraries/RemoteXY}&quot;"/>
+                                    								
+                                </option>
+                                								
+                                <inputType id="io.sloeber.compiler.S.sketch.input.900919520" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="io.sloeber.tool.ar.166186128" name="Arduino archiver" superClass="io.sloeber.tool.ar"/>
+                            							
+                            <tool id="io.sloeber.tool.combine.1737998971" name="Arduino combiner" superClass="io.sloeber.tool.combine"/>
+                            							
+                            <tool id="io.sloeber.tool.objcopy.eep.1549913237" name="Arduino tool Create eeprom" superClass="io.sloeber.tool.objcopy.eep"/>
+                            							
+                            <tool id="io.sloeber.tool.size.1758588744" name="Arduino tool Print Size" superClass="io.sloeber.tool.size"/>
+                            						
+                        </toolChain>
+                        					
+                    </folderInfo>
+                    					
+                    <sourceEntries>
+                        						
+                        <entry excluding="libraries/RemoteXY/classes|libraries/RemoteXY/modules|libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/**/._*|libraries/?*/utility/*/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+                        					
+                    </sourceEntries>
+                    				
+                </configuration>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        		
+        <project id="PuckShotMeter.null.564768994" name="PuckShotMeter"/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="scannerConfiguration">
+        		
+        <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+    	
+    <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+    	
+    <storageModule moduleId="refreshScope"/>
+    
 </cproject>
