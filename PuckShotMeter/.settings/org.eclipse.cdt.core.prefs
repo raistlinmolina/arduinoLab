@@ -197,6 +197,30 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/A.COMPILER.WARN
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.ESP8266.NETWORK.UPLOAD.TOOL/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.ESP8266.NETWORK.UPLOAD.TOOL/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.ESP8266.NETWORK.UPLOAD.TOOL/value=esp8266OTA
+<<<<<<< HEAD
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.DTS/value=0
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.LOCAL/value=1547923224
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.UTC/value=1547919624
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.EXTRA.TIME.ZONE/value=3600
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.CORE.REFERENCED.PLATFORM/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.CORE.REFERENCED.PLATFORM/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.CORE.REFERENCED.PLATFORM/value=${JANTJE.SELECTED.PLATFORM}
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.USED.BOARDS_FILE/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.USED.BOARDS_FILE/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.USED.BOARDS_FILE/value=${JANTJE.BOARDS_FILE}
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.VARIANT.REFERENCED.PLATFORM/delimiter=\:
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.VARIANT.REFERENCED.PLATFORM/operation=replace
+environment/project/io.sloeber.core.toolChain.release.2013844203/A.JANTJE.VARIANT.REFERENCED.PLATFORM/value=${JANTJE.SELECTED.PLATFORM}
+=======
+>>>>>>> e266d2cc6dec450913f705895dc076aa81533904
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.NAME/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.NAME/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/A.NAME/value=WeMos D1 R2 & mini
@@ -472,10 +496,14 @@ environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.BOARD_NA
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.BOARD_NAME/value=WeMos D1 R2 & mini
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/operation=replace
-environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/value=/dev/ttyUSB2
+environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.COM_PORT/value=/dev/ttyUSB0
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/operation=replace
+<<<<<<< HEAD
+environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/value=${eclipse_home}///////////////////////////////////////////////////////
+=======
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.ECLIPSE_LOCATION/value=${eclipse_home}//////////
+>>>>>>> e266d2cc6dec450913f705895dc076aa81533904
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/delimiter=\:
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/operation=replace
 environment/project/io.sloeber.core.toolChain.release.2013844203/JANTJE.EXTRA.ALL/value=
