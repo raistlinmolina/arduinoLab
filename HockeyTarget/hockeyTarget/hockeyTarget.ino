@@ -1,6 +1,9 @@
 #include <stdio.h>
 
-//Times in seconds
+//Times are in seconds
+
+enum litStatus { off, lit, blinking};
+
 const int totalTargets = 5;
 int litTime = 10;
 int totalTime = 180;
@@ -10,12 +13,9 @@ int blinkTime = 1;
 const bool useDeMux = false;
 int lastLitTarget = -1;
 bool stillLit = false;
-int multiplier = 1000; //To convert to milliseconds
-int interval = 1000; // Interval
 int targetsLeft = totalTargets;
 
-
-enum litStatus { off, lit, blinking};
+int targetHitThreshold = 50;
 
 typedef struct {
   int blinkTime;
@@ -28,10 +28,14 @@ typedef struct {
 } target;
 
 
+//To convert times to milliseconds
+int multiplier = 1000; 
 
+//Time triggering
+long previousMillis = 0;
+int interval = 1000;
 
 target targets[totalTargets];
-
 int targetsPins[totalTargets] = {3,4,5,6,7};
 
 void initTargets(){
@@ -70,7 +74,7 @@ void showStatus(){
   Serial.println("");
 }
 
-void updateTargets(){
+void updateTargets(int timePassed){
   stillLit = false;
   int litTarget = 0;
   for (int i = 0; i<totalTargets; i++){
@@ -83,7 +87,7 @@ void updateTargets(){
       Serial.print(itoa(i,buf,10));
       Serial.print(" updated");
       Serial.println("");
-      targets[i].timeLeft = targets[i].timeLeft - interval;
+      targets[i].timeLeft = targets[i].timeLeft - timePassed;
     }
   }
   Serial.println("");
@@ -93,6 +97,26 @@ void updateTargets(){
 
 void updateTargetsStatus(){
 
+}
+
+bool isMoving(int i){
+  return true;
+}
+
+int checkTarget(int i){
+  if(isMoving(i){
+    hitTarget(i);
+  }
+}
+
+void checkTargets(){
+    for (int i = 0; i<totalTargets; i++){
+      checkTarget(i);
+    }
+}
+
+bool roundEnded(){
+  
 }
 
 void setTarget(int i){
@@ -154,10 +178,22 @@ void setup() {
   setTarget(random(totalTargets));
 }
 
+int intervalAction(long timePassed){
+  int result = 0;
+
+  return result;
+}
 void loop() {
-  // put your main code here, to run repeatedly:
-  int newTarget = selectTarget();
-  showStatus();
-  delay(interval);
-  updateTargets();
+
+  unsigned long currentMillis = millis();
+  char buf[12];
+  if(currentMillis - previousMillis > interval) {
+    long timeCount = currentMillis - previousMillis;
+    previousMillis = currentMillis;
+    Serial.print("Time passed: ");
+    Serial.println(itoa(timeCount,buf,10));
+    int newTarget = selectTarget();
+    showStatus();
+    updateTargets(timeCount);
+  }
 }
