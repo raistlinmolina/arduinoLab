@@ -49,12 +49,17 @@
 		<link>
 			<name>libraries/I2Cdev</name>
 			<type>2</type>
-			<location>/home/ejosmol/Arduino/libraries/I2Cdev</location>
+			<location>/home/ejosmol/repos/arduinoLab/libraries/I2Cdev</location>
 		</link>
 		<link>
 			<name>libraries/MPU6050</name>
 			<type>2</type>
-			<location>/home/ejosmol/Arduino/libraries/MPU6050</location>
+			<location>/home/ejosmol/repos/arduinoLab/libraries/MPU6050</location>
+		</link>
+		<link>
+			<name>libraries/RemoteXY</name>
+			<type>2</type>
+			<location>/home/ejosmol/Arduino/libraries/RemoteXY</location>
 		</link>
 		<link>
 			<name>libraries/RemoteXY</name>
