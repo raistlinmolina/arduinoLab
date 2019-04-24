@@ -47,6 +47,7 @@ void initTargets(){
     targets[i].lit = off;
     targets[i].color = 0;
     targets[i].pin = targetsPins[i];
+    pinMode(targetsPins[i], OUTPUT);
   }
 }
 
@@ -64,8 +65,10 @@ void showStatus(){
       Serial.print("H");
     }else if (targets[i].lit == blinking){
       Serial.print("B");
+      digitalWrite(targets[i].pin, HIGH);
     }else if (targets[i].lit == off){
       Serial.print("O");
+      digitalWrite(targets[i].pin, LOW);
     }else{
       Serial.print("?");
     }
@@ -104,7 +107,7 @@ bool isMoving(int i){
 }
 
 int checkTarget(int i){
-  if(isMoving(i){
+  if(isMoving(i)){
     hitTarget(i);
   }
 }
@@ -168,6 +171,14 @@ int selectTarget(){
     
   }
   return newTarget;
+}
+
+void saveTime(){
+  
+}
+
+void saveTargets(){
+  
 }
 
 void setup() {
