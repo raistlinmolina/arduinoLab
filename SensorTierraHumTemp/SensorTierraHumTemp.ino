@@ -4,7 +4,12 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
+#include <ESP8266WiFi.h>
 #include "src/Adafruit_SSD1306/Adafruit_SSD1306.h"
+#include "src/ESP8266HTTPClient/ESP8266HTTPClient.h"
+
+
+//https://api.thingspeak.com/update?api_key=S90DGIEVLHFVT02Y&field1=0
 
 // SCL GPIO5
 // SDA GPIO4
@@ -52,9 +57,37 @@ float maxSoilHum = 0;
 //Timer variables used
 unsigned long currentMillis;
 unsigned long lastMeasureMillis;
+unsigned long lastSentMillis;
 
 unsigned int measureDelay = dht.getMinimumSamplingPeriod();
+unsigned int sendDelay = 1000*60*30; //1000ms in a sec, 60secs in a minute and we send every 30 minutes.
 
+const char* ssid = "SSID";
+const char* password = "passwd";
+
+String get1 = "http://api.thingspeak.com/update?api_key=S90DGIEVLHFVT02Y&field1=";
+String field2 = "&field2=";
+String field3 = "&field3=";
+
+
+void sendDataHTTP(int temperature, int hum, int soil){
+  HTTPClient http;
+  int temp = 0;
+  char tempSign = '?';
+  char str[5];
+  if (units == FARENHEIT){
+    temp = dht.computeHeatIndex(dht.toFahrenheit(temperature), hum, true);
+    tempSign = 'F';
+  }else{
+    temp = dht.computeHeatIndex(temperature, hum, false);
+    tempSign = 'C';
+  }
+  Serial.println("Sending data to thingspeak.com");
+  http.begin(get1+temp+field2+hum+field3+soil);
+  int httpCode = http.GET();
+  String payload = http.getString();
+  http.end();
+}
 
 int read_humidity_sensor() {
   digitalWrite(soilHumSensorVCC, HIGH);
@@ -283,12 +316,28 @@ void setup() {
   display.display();
   currentMillis = millis();
   lastMeasureMillis = currentMillis;
-  delay(1000);
+  lastSentMillis = currentMillis - sendDelay + 30000; //We wait 30 secs to send data so the sensor gets some stable measure
+  int count=0;
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print("Connecting..");
+    count ++;
+    if (count > 15) break;
+  }
+  Serial.println();
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.print("Connected, IP address: ");
+    Serial.println(WiFi.localIP());
+  }else{
+     Serial.println("Could not connect!!!");
+  }
 }
 
 void loop() {
   currentMillis = millis();
   if ((currentMillis - lastMeasureMillis) >= measureDelay){
+    lastMeasureMillis = currentMillis;
     float soilHum = read_humidity_sensor();
     adjustSoilMaxima(soilHum);
     int valueToShow = ((maxSoilValue - soilHum) / maxSoilHum)*100;
@@ -298,6 +347,10 @@ void loop() {
     float temperature = dht.getTemperature();
     serialShowTempHum(temperature, humidity);
     showDataDisplay(temperature, humidity, valueToShow);
+    if ((currentMillis - lastSentMillis) >= sendDelay){
+      lastSentMillis = currentMillis;
+      sendDataHTTP(temperature, humidity, valueToShow);
+    }
   }
   int buttons = checkButtons();
   changeUnits(buttons);
