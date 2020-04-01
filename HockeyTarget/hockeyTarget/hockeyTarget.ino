@@ -2,7 +2,7 @@
 
 //Times are in seconds
 
-enum litStatus { off, lit, blinking};
+enum class litStatus { off, lit, blinking};
 
 const int totalTargets = 5;
 int litTime = 10;
@@ -44,7 +44,7 @@ void initTargets(){
     targets[i].timeLimit = litTime*multiplier;
     targets[i].hit = false;
     targets[i].timeLeft = 0;
-    targets[i].lit = off;
+    targets[i].lit = litStatus::off;
     targets[i].color = 0;
     targets[i].pin = targetsPins[i];
     pinMode(targetsPins[i], OUTPUT);
@@ -61,12 +61,12 @@ void showStatus(){
   for (int i = 0; i<totalTargets; i++){
     if (targets[i].hit){
       Serial.print("H");
-    }else if (targets[i].lit == lit){
+    }else if (targets[i].lit == litStatus::lit){
       Serial.print("H");
-    }else if (targets[i].lit == blinking){
+    }else if (targets[i].lit == litStatus::blinking){
       Serial.print("B");
       digitalWrite(targets[i].pin, HIGH);
-    }else if (targets[i].lit == off){
+    }else if (targets[i].lit == litStatus::off){
       Serial.print("O");
       digitalWrite(targets[i].pin, LOW);
     }else{
@@ -77,7 +77,7 @@ void showStatus(){
   Serial.println("");
 }
 
-void updateTargets(int timePassed){
+int updateTargets(int timePassed){
   stillLit = false;
   int litTarget = 0;
   for (int i = 0; i<totalTargets; i++){
@@ -126,19 +126,19 @@ void setTarget(int i){
     lastLitTarget=i;
     targets[i].hit = false;
     targets[i].timeLeft = litTime * multiplier;
-    targets[i].lit = blinking;
+    targets[i].lit = litStatus::blinking;
 }
 
 void unsetTarget(int i){
     targets[i].hit = false;
     targets[i].timeLeft = 0;
-    targets[i].lit = off;
+    targets[i].lit = litStatus::off;
 }
 
 void hitTarget(int i){
     targets[i].hit = true;
     targets[i].timeLeft = 0;
-    targets[i].lit = lit;
+    targets[i].lit = litStatus::lit;
     targetsLeft--;
 }
 
