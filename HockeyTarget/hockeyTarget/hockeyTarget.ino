@@ -14,8 +14,13 @@ const bool useDeMux = false;
 int lastLitTarget = -1;
 bool stillLit = false;
 int targetsLeft = totalTargets;
+int tiltLedPin = 12;
+int tiltPin = 2;
+int tiltStatus = LOW;
 
 int targetHitThreshold = 50;
+
+
 
 typedef struct {
   int blinkTime;
@@ -36,7 +41,7 @@ long previousMillis = 0;
 int interval = 1000;
 
 target targets[totalTargets];
-int targetsPins[totalTargets] = {3,4,5,6,7};
+int targetsPins[totalTargets] = {6,7,8,9,10};
 
 void initTargets(){
   for (int i=0; i<totalTargets; i++){
@@ -181,11 +186,22 @@ void saveTargets(){
   
 }
 
+void targetHit(){
+  Serial.println("###################################################");
+  Serial.println("Target has been hit");
+  Serial.println("###################################################");
+  digitalWrite(tiltLedPin, HIGH);
+  delay(1000);
+  digitalWrite(tiltLedPin, LOW);
+  
+}
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   randomSeed(analogRead(0));
   initTargets();
+  attachInterrupt(digitalPinToInterrupt(tiltPin), targetHit, CHANGE);
   setTarget(random(totalTargets));
 }
 
