@@ -224,3 +224,14 @@ void loop() {
     updateTargets(timeCount);
   }
 }
+
+int getBit(int value, int pos){
+  return (value & ( 1 << pos )) >> pos
+}
+
+void decode(int value, int pins[], int size){
+   for (int i=0, i<size, i++){
+    pins [i] = getBit(value, i);
+   }
+}
+}
