@@ -1,23 +1,48 @@
 #include <stdio.h>
 
+/*
+ * Already hit and service pins:
+ * D3,D4,D5,D6
+ * Blinking target pins
+ * D0,D1,D2
+ * Tilt sensor pin
+ * D7
+ * 
+*/
+
 //Times are in seconds
 
 enum class litStatus { off, lit, blinking};
 
+//Number of targets
 const int totalTargets = 5;
+//
 int litTime = 10;
+//Total time of the round in seconds
 int totalTime = 180;
+//Change time after "changeTime" seconds
 int changeTime = 10;
+//Time used so far
 int timeUsed = 0;
+//Blink interval
 int blinkTime = 1;
+//Using de/multiplexors
 const bool useDeMux = false;
+//Last target that was lit
 int lastLitTarget = -1;
+//Is still lit?
 bool stillLit = false;
+//Targets left unhit
 int targetsLeft = totalTargets;
+
+//LED that indicates target was hit
 int tiltLedPin = 12;
+
+//Tilt sensor pin
 int tiltPin = 2;
 int tiltStatus = LOW;
 
+//Sensisitivity sensor threshold
 int targetHitThreshold = 50;
 
 
@@ -43,6 +68,16 @@ int interval = 1000;
 target targets[totalTargets];
 int targetsPins[totalTargets] = {6,7,8,9,10};
 
+int getBit(int value, int pos){
+  return (value & ( 1 << pos )) >> pos
+}
+
+void decode(int value, int pins[], int size){
+   for (int i=0, i<size, i++){
+    pins [i] = getBit(value, i);
+   }
+}
+ 
 void initTargets(){
   for (int i=0; i<totalTargets; i++){
     targets[i].blinkTime = blinkTime*multiplier;
@@ -225,13 +260,5 @@ void loop() {
   }
 }
 
-int getBit(int value, int pos){
-  return (value & ( 1 << pos )) >> pos
-}
 
-void decode(int value, int pins[], int size){
-   for (int i=0, i<size, i++){
-    pins [i] = getBit(value, i);
-   }
-}
 }
