@@ -8,15 +8,17 @@
  * Tilt sensor pin
  * D7
  * 
+ * Times are in seconds
+ * 
 */
 
-//Times are in seconds
+//
 
-enum class litStatus { off, lit, blinking};
+
 
 //Number of targets
 const int totalTargets = 5;
-//
+
 int litTime = 10;
 //Total time of the round in seconds
 int totalTime = 180;
@@ -26,8 +28,6 @@ int changeTime = 10;
 int timeUsed = 0;
 //Blink interval
 int blinkTime = 1;
-//Using de/multiplexors
-const bool useDeMux = false;
 //Last target that was lit
 int lastLitTarget = -1;
 //Is still lit?
@@ -36,16 +36,16 @@ bool stillLit = false;
 int targetsLeft = totalTargets;
 
 //LED that indicates target was hit
-int tiltLedPin = 12;
+int tiltLedPin = 15;
 
 //Tilt sensor pin
-int tiltPin = 2;
+int tiltPin = D7;
 int tiltStatus = LOW;
 
 //Sensisitivity sensor threshold
 int targetHitThreshold = 50;
 
-
+enum class litStatus { off, lit, blinking};
 
 typedef struct {
   int blinkTime;
@@ -61,19 +61,20 @@ typedef struct {
 //To convert times to milliseconds
 int multiplier = 1000; 
 
-//Time triggering
+
 long previousMillis = 0;
+//Time triggering
+//We use this to check for changes so it must be lower than any other interval used
 int interval = 1000;
 
 target targets[totalTargets];
-int targetsPins[totalTargets] = {6,7,8,9,10};
 
 int getBit(int value, int pos){
-  return (value & ( 1 << pos )) >> pos
+  return (value & ( 1 << pos )) >> pos;
 }
 
 void decode(int value, int pins[], int size){
-   for (int i=0, i<size, i++){
+   for (int i=0; i<size; i++){
     pins [i] = getBit(value, i);
    }
 }
@@ -86,8 +87,6 @@ void initTargets(){
     targets[i].timeLeft = 0;
     targets[i].lit = litStatus::off;
     targets[i].color = 0;
-    targets[i].pin = targetsPins[i];
-    pinMode(targetsPins[i], OUTPUT);
   }
 }
 
@@ -231,34 +230,69 @@ void targetHit(){
   
 }
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  randomSeed(analogRead(0));
-  initTargets();
-  attachInterrupt(digitalPinToInterrupt(tiltPin), targetHit, CHANGE);
-  setTarget(random(totalTargets));
-}
+//void setup() {
+//  // put your setup code here, to run once:
+//  Serial.begin(9600);
+//  randomSeed(analogRead(0));
+//  initTargets();
+//  attachInterrupt(digitalPinToInterrupt(tiltPin), targetHit, CHANGE);
+//  setTarget(random(totalTargets));
+//}
+//
+//int intervalAction(long timePassed){
+//  int result = 0;
+//
+//  return result;
+//}
+//void loop() {
+//
+//  unsigned long currentMillis = millis();
+//  char buf[12];
+//  if(currentMillis - previousMillis > interval) {
+//    long timeCount = currentMillis - previousMillis;
+//    previousMillis = currentMillis;
+//    Serial.print("Time passed: ");
+//    Serial.println(itoa(timeCount,buf,10));
+//    int newTarget = selectTarget();
+//    showStatus();
+//    updateTargets(timeCount);
+//  }
+//}
 
-int intervalAction(long timePassed){
-  int result = 0;
-
-  return result;
-}
-void loop() {
-
-  unsigned long currentMillis = millis();
-  char buf[12];
-  if(currentMillis - previousMillis > interval) {
-    long timeCount = currentMillis - previousMillis;
-    previousMillis = currentMillis;
-    Serial.print("Time passed: ");
-    Serial.println(itoa(timeCount,buf,10));
-    int newTarget = selectTarget();
-    showStatus();
-    updateTargets(timeCount);
+void testDecode(){
+  int pines=4;
+  int pinesValues[pines];
+  Serial.println("Test decode: ");
+  for (int i=0; i<16; i++){
+    decode(i, pinesValues, pines);
+    Serial.print("Bits for ");
+    Serial.print(i);
+    Serial.print(": ");
+    for (int j=3; j>-1; j--){
+        Serial.print(pinesValues[j]);
+      }
+    Serial.println(""); 
   }
 }
 
+void testGetBit(){
+    Serial.println("Test getBit: ");
+    for (int i=0; i<16; i++){
+      Serial.print("Bits for ");
+      Serial.print(i);
+      Serial.print(": ");
+      for (int j=3; j>-1; j--){
+        Serial.print(getBit(i,j));
+      }
+      Serial.println("");
+    }
+}
 
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+//testGetBit();
+  testDecode();
 }
